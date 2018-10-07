@@ -1,5 +1,6 @@
 <!doctype <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,17 +8,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
     <script src="main.js"></script>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 </head>
+
 <body>
     <div id="container">
         <header>
             <h1>Energy markets analysis</h1>
             <nav>
                 <ul>
-                    <li>Lecture 1</li>
-                    <li>Lecture 2</li>
-                    <li>Lecture 3</li>
-                    <li>Lecture 4</li>
+                    <li><a href="#" id='Lecture1'>Lecture 1</a></li>
+                    <li><a href="#" id="Lecture2">Lecture 2</a></li>
+                    <li><a href="#" id="Lecture3">Lecture 3</a></li>
+                    <li><a href="#" id='Lecture4'>Lecture 4</a></li>
                 </ul>
             </nav>
         </header>
@@ -32,4 +35,21 @@
         </footer>
     </div>
 </body>
+<script>
+    $(function() {
+        $("#Lecture1").on("click", function() {
+            $("main").load("lecture1.html main");
+        });
+        $("#Lecture2").on("click", function() {
+            $("main").load("lecture2.html main");
+        });
+        $("#Lecture3").on("click", function() {
+            $("main").load("lecture3.html main");
+        });
+        $("#Lecture4").on("click", function() {
+            $("main").load("lecture4.html main");
+        });
+    });
+</script>
+
 </html>
