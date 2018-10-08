@@ -43,9 +43,9 @@
 <script>
     $(function() {
         $("#Lecture1").on("click", function() {
-            $("main").load("lecture1.html main");
-            MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
-            $(window).load(MathJax.Hub.Queue(["Typeset", MathJax.Hub]));
+            $("main").load("lecture1.html main", function() {
+                MathJax.Hub.Queue(["Typeset", MathJax.Hub, "main"]);
+            });
         });
         $("#Lecture2").on("click", function() {
             $("main").load("lecture2.html main");
@@ -57,7 +57,6 @@
             $("main").load("testLatex2.html main");
         });
     });
-    $(window).load(MathJax.Hub.Queue(["Typeset", MathJax.Hub]));
 </script>
 
 </html>

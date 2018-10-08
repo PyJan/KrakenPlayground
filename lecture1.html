@@ -19,7 +19,7 @@
     <main>
         <section>
             <h2>What shall (not) be discussed here?</h2>
-            <h3>To be covered:
+            To be covered:
             </h3>
             <ul>
                 <li> Economics of power generation and energy markets</li>
@@ -27,7 +27,7 @@
                 <li> Modelling of energy price development</li>
                 <li> Risk management</li>
             </ul>
-            <h3>To be omitted:</h3>
+            To be omitted:
             <ul>
                 <li> Physical properties of transmission network, power generation or oil extraction.</li>
                 <li> Policy and regulatory framework of energy markets, retail markets, renewable energy subsidies.</li>
@@ -35,28 +35,30 @@
         </section>
 
         <section>
-            <h2>What are energy markets?
-                <h2>
-                    <h3>Wikipedia: Energy markets are commodity markets that deal specifically with the trade and supply of energy. Energy market may refer to an electricity market, but can also refer to other sources of energy.\\~\\ Energy industry:
-                    </h3>
+            <h2>What are energy markets?</h2>
+            Wikipedia: Energy markets are commodity markets that deal specifically with the trade and supply of energy. Energy market may refer to an electricity market, but can also refer to other sources of energy.
+            <p>
+                Energy industry:
+
+                <ul>
+                    <li> petroleum industry - oil companies, petroleum refiners, fuel transport</li>
+                    <li> gas industry</li>
+                    <li> coal industry</li>
+                    <li> electrical power industry</li>
                     <ul>
-                        <li> petroleum industry - oil companies, petroleum refiners, fuel transport</li>
-                        <li> gas industry</li>
-                        <li> coal industry</li>
-                        <li> electrical power industry</li>
-                        <ul>
-                            <li> Fossil - coal, natural gas, petroleum</li>
-                            <li> Nuclear</li>
-                            <li> Renewable - hydroelectric, wind, solar, biomass, thermal</li>
-                        </ul>
+                        <li> Fossil - coal, natural gas, petroleum</li>
+                        <li> Nuclear</li>
+                        <li> Renewable - hydroelectric, wind, solar, biomass, thermal</li>
                     </ul>
+                </ul>
+            </p>
         </section>
 
 
 
         <section>
             <h2>Units matter</h2>
-            <h3>Different commodities are measured in different units.</h3>
+            Different commodities are measured in different units.
 
             <ul>
                 <li> Oil - barrel ('blue barrel', bbl) 1 barrel = 42 US gallons = 42 * 3.79 liters</li>
@@ -70,36 +72,40 @@
 
         <section>
             <h2>Forward price on a financial asset</h2>
-            Standard cost-of-carry formula: \[ F_{0,T}=S_0e^{(r-\delta) T} \] F - forward price S - price of underlying r - continuously compounded interest rate $\delta$ - continuous dividend yield on the asset T - delivery\\~\\ Condition: Asset can be stored with
-            no costs.
+            Standard cost-of-carry formula: \[ F_{0,T}=S_0e^{(r-\delta) T} \]
+            <br> F - forward price <br> S - price of underlying <br> r - continuously compounded interest rate <br> $\delta$ - continuous dividend yield on the asset<br> T - delivery
+            <p> Condition: Asset can be stored with no costs.</p>
         </section>
 
         <section>
             <h2>Mispriced forward</h2>
             <ul>
-                <li> Assume stock price is currently \$100, stock pays no dividend and continuously compounded interest rate is 9.6\% p.a.</li>
+                <li> Assume stock price is currently $100, stock pays no dividend and continuously compounded interest rate is 9.6% p.a.</li>
                 <li> What is the theoretical forward price for one year? \begin{equation} F_{0,1}=100*exp(0.096*1) \approx 110 \end{equation}</li>
-                <li> You see on the market that the forward is traded at \$105. What do you do? - Long forward, short spot (and deposit proceeds at the bank for 1 year).</li>
-                <li> Forward is traded at \$115 - short forward and long spot (borrow from bank for 1 year).</li>
-                <li> In both strategies you cash in \$5 in 1 year from now.</li>
+                <li> You see on the market that the forward is traded at $105. What do you do? - Long forward, short spot (and deposit proceeds at the bank for 1 year).</li>
+                <li> Forward is traded at $115 - short forward and long spot (borrow from bank for 1 year).</li>
+                <li> In both strategies you cash in $5 in 1 year from now.</li>
             </ul>
         </section>
 
 
         <section>
             <h2>Commodities specifics</h2>
-            <h3>Commodities are different to financials assets because of:</h3>
+            Commodities are different to financials assets because of:
             <ul>
 
                 <li> Storage cost - financial markets are always carry markets, storage of a commodity is an economic decision</li>
                 <li> Lease rate - short-sellers have to compensate lenders, equivalent to payment for missed dividends in financial markets</li>
                 <li> Convenience yield - only for owners in a commodity-related business who can utilize the commodity </ul> Equilibrium pricing of commodity forwards: \begin{equation} e^{-rT}F_{0,T}=E_0(S_T)e^{- \alpha T} \end{equation}</li>
-            <li>$\alpha$ - the discount rate for the commodity, $\alpha = r + risk premium$</li>
+            </ul>
+            <p>
+                $\alpha$ - the discount rate for the commodity, $\alpha = r + risk premium$
+            </p>
         </section>
 
 
         <section>
-            <h2>{Lease rate}</h2>
+            <h2>Lease rate</h2>
             Equilibrium condition for a commodity relates to extraction, not to storage above ground. The lender will require a lease payment so that the commodity loan is a fair deal. \begin{eqnarray} \delta_l & = & \alpha - \frac{1}{T}\ln \left[E_0 (S_T)/S_0\right]
             \\ & = & r - \frac{1}{T}\ln \left[F_{0,T}/S_0 \right] \end{eqnarray} The lease rate compensates the lender for the possibility that the expected growth rate of the commodity is less than the required return on an asset that has the same systematic
             risk as the commodity.
@@ -107,19 +113,13 @@
 
         <section>
             <h2>Storage costs: cash-and-carry</h2>
-            For cash-and-carry strategy with storage cost $\lambda$ no arbitrage requires: \begin{equation} F_{0,T} \leq S_0e^{(r+\lambda)T} \end{equation} For both storage and no arbitrage to occur: \begin{equation} \label{carry_market_forward} F_{0,T} = S_0e^{(r+\lambda)T}
-            \end{equation}
+            For cash-and-carry strategy with storage cost $\lambda$ no arbitrage requires: \begin{equation} F_{0,T} \leq S_0e^{(r+\lambda)T} \end{equation} For both storage and no arbitrage to occur: \begin{equation} F_{0,T} = S_0e^{(r+\lambda)T} \end{equation}
             <ul>
-                <li>
-                    (\ref{carry_market_forward}) is the forward price in a carry market, where the commodity is stored.</li>
-                <li>
-                    Storage costs increase the upper bound for the forward price.</li>
-                <li>
-                    Storage costs can be viewed as a negative dividend.</li>
-                <li>
-                    Because a commodity can be stored does not mean that it should/will be stored!</li>
+                <li>F is the forward price in a carry market, where the commodity is stored.</li>
+                <li>Storage costs increase the upper bound for the forward price.</li>
+                <li>Storage costs can be viewed as a negative dividend.</li>
+                <li>Because a commodity can be stored does not mean that it should/will be stored!</li>
             </ul>
-
         </section>
 
 
@@ -131,7 +131,7 @@
                 <li> Storage costs not present in decision making. Neither arbitrageur nor lender store the commodity.</li>
                 <li> Whatever the forward price, lender adjusts lease rate so that arbitrage profit is always zero $\Rightarrow$ no lower bound on the forward price.</li>
                 <li> A high forward price gives rise to arbitrage but low forward price doesn't!</li>
-                <li> Economic pressures eventually push price to (\ref{carry_market_forward}) even without outright arbitrage opportunities.</li>
+                <li> Economic pressures eventually push price to upper limit even without outright arbitrage opportunities.</li>
             </ul>
         </section>
 

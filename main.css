@@ -1,11 +1,8 @@
 #container {
     display: grid;
     grid-template-rows: 200px auto 50px;
-    grid-template-columns: auto 200px;
-    grid-template-areas:
-    "header header"
-    "main aside"
-    "footer footer";
+    grid-template-columns: auto 350px;
+    grid-template-areas: "header header" "main aside" "footer footer";
 }
 
 aside {
@@ -25,4 +22,13 @@ footer {
 
 header {
     grid-area: header;
+}
+
+section {
+    border-width: medium;
+    border-style: solid;
+    border-color: blue;
+    margin: 20px;
+    padding: 10px 40px 10px 40px;
+    line-height: 2;
 }
