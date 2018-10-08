@@ -8,11 +8,174 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
     <script src="main.js"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ["\\(","\\)"]] } });
+    </script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML">
+    </script>
 </head>
 
 <body>
     <main>
-        Kick-off lecture.
+        <section>
+            <h2>What shall (not) be discussed here?</h2>
+            <h3>To be covered:
+            </h3>
+            <ul>
+                <li> Economics of power generation and energy markets</li>
+                <li> Traded products and their valuation</li>
+                <li> Modelling of energy price development</li>
+                <li> Risk management</li>
+            </ul>
+            <h3>To be omitted:</h3>
+            <ul>
+                <li> Physical properties of transmission network, power generation or oil extraction.</li>
+                <li> Policy and regulatory framework of energy markets, retail markets, renewable energy subsidies.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>What are energy markets?
+                <h2>
+                    <h3>Wikipedia: Energy markets are commodity markets that deal specifically with the trade and supply of energy. Energy market may refer to an electricity market, but can also refer to other sources of energy.\\~\\ Energy industry:
+                    </h3>
+                    <ul>
+                        <li> petroleum industry - oil companies, petroleum refiners, fuel transport</li>
+                        <li> gas industry</li>
+                        <li> coal industry</li>
+                        <li> electrical power industry</li>
+                        <ul>
+                            <li> Fossil - coal, natural gas, petroleum</li>
+                            <li> Nuclear</li>
+                            <li> Renewable - hydroelectric, wind, solar, biomass, thermal</li>
+                        </ul>
+                    </ul>
+        </section>
+
+
+
+        <section>
+            <h2>Units matter</h2>
+            <h3>Different commodities are measured in different units.</h3>
+
+            <ul>
+                <li> Oil - barrel ('blue barrel', bbl) 1 barrel = 42 US gallons = 42 * 3.79 liters</li>
+                <li> Coal - metric ton (MT) 1 MT = 1,000 kilograms</li>
+                <li> Natural gas - British thermal unit (Btu), megawatt hour (MWh)</li>
+                <li> Power - megawatt hour (MWh) energy consumed (MWh) = electrical load (MW) * run time (hours)</li>
+            </ul>
+        </section>
+
+
+
+        <section>
+            <h2>Forward price on a financial asset</h2>
+            Standard cost-of-carry formula: \[ F_{0,T}=S_0e^{(r-\delta) T} \] F - forward price S - price of underlying r - continuously compounded interest rate $\delta$ - continuous dividend yield on the asset T - delivery\\~\\ Condition: Asset can be stored with
+            no costs.
+        </section>
+
+        <section>
+            <h2>Mispriced forward</h2>
+            <ul>
+                <li> Assume stock price is currently \$100, stock pays no dividend and continuously compounded interest rate is 9.6\% p.a.</li>
+                <li> What is the theoretical forward price for one year? \begin{equation} F_{0,1}=100*exp(0.096*1) \approx 110 \end{equation}</li>
+                <li> You see on the market that the forward is traded at \$105. What do you do? - Long forward, short spot (and deposit proceeds at the bank for 1 year).</li>
+                <li> Forward is traded at \$115 - short forward and long spot (borrow from bank for 1 year).</li>
+                <li> In both strategies you cash in \$5 in 1 year from now.</li>
+            </ul>
+        </section>
+
+
+        <section>
+            <h2>Commodities specifics</h2>
+            <h3>Commodities are different to financials assets because of:</h3>
+            <ul>
+
+                <li> Storage cost - financial markets are always carry markets, storage of a commodity is an economic decision</li>
+                <li> Lease rate - short-sellers have to compensate lenders, equivalent to payment for missed dividends in financial markets</li>
+                <li> Convenience yield - only for owners in a commodity-related business who can utilize the commodity </ul> Equilibrium pricing of commodity forwards: \begin{equation} e^{-rT}F_{0,T}=E_0(S_T)e^{- \alpha T} \end{equation}</li>
+            <li>$\alpha$ - the discount rate for the commodity, $\alpha = r + risk premium$</li>
+        </section>
+
+
+        <section>
+            <h2>{Lease rate}</h2>
+            Equilibrium condition for a commodity relates to extraction, not to storage above ground. The lender will require a lease payment so that the commodity loan is a fair deal. \begin{eqnarray} \delta_l & = & \alpha - \frac{1}{T}\ln \left[E_0 (S_T)/S_0\right]
+            \\ & = & r - \frac{1}{T}\ln \left[F_{0,T}/S_0 \right] \end{eqnarray} The lease rate compensates the lender for the possibility that the expected growth rate of the commodity is less than the required return on an asset that has the same systematic
+            risk as the commodity.
+        </section>
+
+        <section>
+            <h2>Storage costs: cash-and-carry</h2>
+            For cash-and-carry strategy with storage cost $\lambda$ no arbitrage requires: \begin{equation} F_{0,T} \leq S_0e^{(r+\lambda)T} \end{equation} For both storage and no arbitrage to occur: \begin{equation} \label{carry_market_forward} F_{0,T} = S_0e^{(r+\lambda)T}
+            \end{equation}
+            <ul>
+                <li>
+                    (\ref{carry_market_forward}) is the forward price in a carry market, where the commodity is stored.</li>
+                <li>
+                    Storage costs increase the upper bound for the forward price.</li>
+                <li>
+                    Storage costs can be viewed as a negative dividend.</li>
+                <li>
+                    Because a commodity can be stored does not mean that it should/will be stored!</li>
+            </ul>
+
+        </section>
+
+
+
+        <section>
+            <h2>Storage costs: reverse cash-and-carry</h2>
+            Reverse cash-and-carry: Buying forward and short-selling commodity
+            <ul>
+                <li> Storage costs not present in decision making. Neither arbitrageur nor lender store the commodity.</li>
+                <li> Whatever the forward price, lender adjusts lease rate so that arbitrage profit is always zero $\Rightarrow$ no lower bound on the forward price.</li>
+                <li> A high forward price gives rise to arbitrage but low forward price doesn't!</li>
+                <li> Economic pressures eventually push price to (\ref{carry_market_forward}) even without outright arbitrage opportunities.</li>
+            </ul>
+        </section>
+
+
+        <section>
+            <h2>Convenience yield</h2>
+            <ul>
+                <li> Extra nonmonetary return stemming from the physical inventory of a commodity (mainly for producers - no production disruption).</li>
+                <li> Commodity must be stored!</li>
+                <li> For convenience yield c, the owner will accept the forward price \begin{equation} F_{0,T} \geq S_0e^{(r+\lambda-c)T} \end{equation}</li>
+                <li> Lease rate in this case is $\delta_l=c-\lambda$</li>
+                <li> Convenience yield can explain anomalously low forward prices (when there is storage). These prices don't give rise to arbitrage (previous slide).</li>
+            </ul>
+        </section>
+
+
+
+        <section>
+            <h2>Electricity</h2>
+            <ul>
+                <li> Electricity is difficult to store - carry market is limited (we will further assume no storability at all).</li>
+                <li> Maximum supply is fixed.</li>
+                <li> Price is set by current supply and demand - demand (and hence price) varies by month, day and hour (seasonality).</li>
+                <li> Forward prices provide price discovery, revealing otherwise unobtainable information about the future price of electricity.</li>
+            </ul>
+        </section>
+
+
+        <section>
+            <h2>Natural gas and oil</h2>
+            Natural gas
+            <ul>
+                <li> Gas is costly to transport - prices vary regionally.</li>
+                <li> Gas is costly to store.</li>
+                <li> Demand is highly seasonal with peak in winter months.</li>
+                <li> Constant supply</li>
+                <li> Storage possibilities include underground storage facilities or liquefaction.</li>
+                <li> Seasonality is reversed in Southern hemisphere.</li>
+            </ul> Oil
+            <ul>
+                <li> Easier to transport than gas - global market.</li>
+                <li> Easier to store than gas - unimportant seasonality.</li>
+            </ul>
+        </section>
     </main>
 
 </body>

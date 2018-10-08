@@ -9,6 +9,11 @@
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
     <script src="main.js"></script>
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ["\\(","\\)"]] } });
+    </script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML">
+    </script>
 </head>
 
 <body>
@@ -39,6 +44,8 @@
     $(function() {
         $("#Lecture1").on("click", function() {
             $("main").load("lecture1.html main");
+            MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+            $(window).load(MathJax.Hub.Queue(["Typeset", MathJax.Hub]));
         });
         $("#Lecture2").on("click", function() {
             $("main").load("lecture2.html main");
@@ -47,9 +54,10 @@
             $("main").load("lecture3.html main");
         });
         $("#Lecture4").on("click", function() {
-            $("main").load("lecture4.html main");
+            $("main").load("testLatex2.html main");
         });
     });
+    $(window).load(MathJax.Hub.Queue(["Typeset", MathJax.Hub]));
 </script>
 
 </html>
