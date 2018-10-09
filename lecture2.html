@@ -8,12 +8,200 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
     <script src="main.js"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ["\\(","\\)"]] } });
+    </script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML">
+    </script>
 </head>
 
 <body>
     <main>
-        Financially traded products.
+        <section>
+            <h1>Terminology</h1>
+
+            <ul>
+                <li> Spot price - price for 'immediate' delivery</li>
+                <li> Forward - contract on future delivery for a fixed price, OTC deal</li>
+                <li> Futures - contract on future delivery for a fixed price, exchange deal</li>
+                <li> Option - contract on possible future delivery for a fixed price where the buyer of the contract can decide if he wants to execute or not</li>
+                <li> Swap - Contract on exchange of payments </li>
+            </ul>
+        </section>
+
+
+        <section>
+            <h1>Power contracts</h1>
+
+            <ul>
+                <li> Spot - immediate delivery is organised by the market operator (state company) which ensures balance of supply and demand</li>
+                <li> Forward/Futures - Power is delivered over standardized periods - years (Y17), quarters (Y16Q3), months (Y16M02), weeks (Y16W08), weekends (Y16WE09) or days (Y16M02D23)</li>
+
+                Two main types of delivery:
+                <ul>
+                    <li> Baseload - 24/7</li>
+                    <li> Peakload - every working day 8-20</li>
+                </ul>
+
+                <li> Option - outright options are scarse and only over the counter, cross-border transmission capacities have option-like characteritics</li>
+
+            </ul>
+        </section>
+
+
+        <section>
+            <h1>Power contracts - examples</h1>
+            <p>Q: You bought 5 MW of Y17 baseload product for 26.5 EUR/MWh. How much do you have to pay for the whole delivery?
+                <br> A: 1,160,700 EUR (5*365*24*26.5)</p>
+            <p>Q: The same product is quoted at 24.5 EUR/MWh after a while. What is MTM (mark-to-market) of your deal?<br> A: - 87,600 EUR (5*365*24*-2)</p>
+            <p>Q: Y16Q2 has price 29 EUR/MWh, Y16M04 has price 29.5 EUR/MWh and Y16M05 has price 29 EUR/MWh. How much does Y16M06 have to cost so that there is no arbitrage opportunity (=possibility of riskless profit with no upfront payment)? Assume a month
+                has 30 days...<br> A: 28.5 EUR/MWh (29.5+29+28.5=3*29)</p>
+
+        </section>
+
+
+
+        <section>
+            <h1>Why forwards?</h1>
+            <ul>
+                <li> Speculations - You can speculate on commodity price movement without owning it. Open a position and close it before delivery.</li>
+                <li> Hedging - Producers can fix the price of their future production and thus be insulated from market price volatility.</li>
+            </ul>
+            <p>Cross-hedge - when the underlying of the contract is not perfectly correlated with the commodity you hedge (for example hedging jet fuel with crude oil). This gives rise to basis risk.</p>
+            <p> Strip hedge - we hedge each individual obligation with a futures contract.</p>
+            <p> Stack hedge - all future exposure is hedged by a single maturity futures contract, usually the nearest-term product. Stack and roll strategy (basis risk is present).</p>
+        </section>
+
+
+
+        <section>
+            <h1>Why hedge?</h1>
+            Reasons to hedge:
+            <ul>
+                <li> Taxes</li>
+                <li> Bankruptcy and distress costs</li>
+                <li> External financing</li>
+                <li> Increase debt capacity</li>
+                <li> Managerial risk aversion</li>
+            </ul>
+            Reasons not to hedge:
+            <ul>
+                <li> Transaction costs</li>
+                <li> Costly expertise</li>
+                <li> Managerial controls in place</li>
+                <li> Complex reporting</li>
+            </ul>
+        </section>
+
+
+
+        <section>
+            <h1>How to hedge - hedge ratio</h1>
+            When you hedge commodity with forward on another commodity (basis risk), how many forwards do you need? Notation:
+            <ul>
+                <li> $S_t$ is the price of commodity which you want to hedge</li>
+                <li> $F_{t,X}$ is the forward price on another commodity with maturity X</li>
+                <li> $\sigma_S$ is volatility of $\Delta S$</li>
+                <li> $\sigma_F$ is volatility of $\Delta F$</li>
+                <li> $\rho$ is correlation between $\Delta S$ and $\Delta F$</li>
+                <li> h is hedge ratio, number of forwards to hedge 1 commodity unit</li>
+            </ul>
+            Principle - minimize the variance of your hedged position: \begin{equation} h=\rho \frac{\sigma_S}{\sigma_F} \end{equation}
+
+        </section>
+
+
+        <section>
+            <h1>How to hedge - hedge ratio II</h1>
+            The idea of hedge ratio: You need commodity at time T. You buy h forwards now, $t=0$, and at time T you sell forwards and buy commodity on spot. Your total price for commodity is: \begin{equation} S_T+h*F_{0,X}-h*F_{T,X} \end{equation} You minimize the
+            variance of this equation by choosing h as hedge ratio (there is a proof in Hull, Chapter 3).
+            <p> Note: h is the regression coefficient of $\Delta S$ on $\Delta F$.</p>
+        </section>
+
+
+        <section>
+            <h1>Forward curve</h1>
+            Forward curve - a collection of futures ordered by maturity Basic shapes:
+            <ul>
+                <li> Backwardation - downward sloping curve, spot $>$ forward</li>
+                <li> Contango - upward sloping curve, spot $
+                    <$ forward</li>
+            </ul>
+            Normal backwardation theory - natural shorts (producers) dominate the market over natural longs (industrial company). Speculator fill the gap and demand compensation (=risk premium P) for their risk-taking. \begin{equation} F_{0,T}=E_0[S(T)]-P \end{equation}
+            <p>
+                J. M. Keynes: risk premium is positive (generally not necessary...)</p>
+        </section>
+
+
+
+        <section>
+            <h1>Cross-border transmission capacity (CBTC)</h1>
+            <ul>
+                <li> The right to transfer power from one country to another.</li>
+                <li> CBTC is granted by the market operator in auction.</li>
+                <li> CBTC should be executed only if it makes economic sense, i.e. if you profit from the execution.</li>
+                \begin{equation} execution ~ profit=max(0,P_{sink}-P_{source}) \end{equation}
+                <li> CBTC can be modelled as an option on country spread</li>
+            </ul>
+            <p>Q: You bought 5 MW $CZ>DE$ (from CZ to DE) CBTC for Y16M03D01 and Y16M03D02 for 2 EUR/MWh. What is your total profit if prices in those days were 25(28) EUR/MWh and 23(19) EUR/MWh for CZ(DE), respectively?<br> A: -120 EUR (-2*5*48+3*5*24+0*5*24)</p>
+        </section>
+
+        <section>
+            <h1>Option basics</h1>
+
+            <ul>
+                <li> Long position - option was bought, short position - option was sold</li>
+                <li> Call option - right to buy, payoff max(0, S-K); put option - right to sell, payoff max(0, K-S)</li>
+                <li> Intrinsic value - payoff if we could immediately exercise the option</li>
+                <li> Time value - value inherent in our right (not obligation) to exercise the option</li>
+                \[ \text{Option value}=\text{Intrinsic value}+\text{Time value} \]
+                <li> European style option - payoff at maturity, American style option - execution possible prior to maturity</li>
+                <li> Vanilla option - European or American, exotic option - fancier rules (Bermudan, Asian (average price), barrier (price must hit a barrier before execution), binary (all-or-nothing nature))</li>
+            </ul>
+        </section>
+
+        <section>
+            <h1>Greeks</h1>
+
+            <ul>
+                <li> Greeks represent sensitivities of option value to changes in underlying parameters</li>
+                <li> Delta $\Delta$ - sensitivity to underlying spot price $S$</li>
+                \[ \Delta = \frac{\partial V}{\partial S} \]
+                <li> Vega $\nu$ - sensitivity to volatility</li>
+                \[ \nu = \frac{\partial V}{\partial \sigma} \]
+                <li> Theta $\Theta$ - sensitivity to time decay</li>
+                \[ \Theta = \frac{\partial V}{\partial t} \]
+                <li> Gamma $\Gamma$ - sensitivity of Delta to spot price</li>
+                \[ \Gamma = \frac{\partial \Delta}{\partial S}=\frac{\partial^2 V}{\partial S^2} \]
+            </ul>
+        </section>
+
+        <section>
+            <h1>Delta</h1>
+            <ul>
+                <li> Option value locally behaves as if we held position in $\Delta$ underlying.</li>
+                <li> Delta of call option in $[0,1]$.</li>
+                <li> Delta of put option in $[-1,0]$.</li>
+                <li> For put and call with same underlying, maturity and strike:</li>
+                \[ \Delta_{call} - \Delta_{put} = 1 \]
+                <li> Deep ITM option: $\Delta=\pm 1$, deep OTM option: $\Delta=0$</li>
+
+                <li> Put-call parity:</li>
+                \[ C-P=D(F-K) \] D - discount factor, F - forward price
+            </ul>
+        </section>
+
+        <section>
+            <h1>Gamma</h1>
+            <ul>
+                <li> Gamma measures curvature of option value with respect to underlying.</li>
+                <li> Always positive for long positions and negative for short positions.</li>
+                <li> Gamma is highest for at-the-money options.</li>
+                <li> Second term in Taylor expansion with respect to price of underlying.</li>
+            </ul>
+        </section>
     </main>
+
 </body>
 
 </html>
