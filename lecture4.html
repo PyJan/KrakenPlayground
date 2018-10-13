@@ -4,16 +4,123 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title></title>
+    <title>Page Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
     <script src="main.js"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ["\\(","\\)"]] } });
+    </script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML">
+    </script>
 </head>
 
 <body>
     <main>
-        Gas.
+        <section>
+            <h1>Terminology</h1>
+            <ul>
+                <li> Crude oil - unrefined petroleum which exists in liquid phase in natural underground reservoirs</li>
+                <li> Refining - process of purification of crude oil</li>
+                <li> Major refined products are:</li>
+
+                <ul>
+                    <li> Gasoline - used for cars</li>
+                    <li> Diesel - used for cars</li>
+                    <li> Kerosene - jet engines, tractors</li>
+                    <li> LPG (propane, butane) - fuel, petrochemical input</li>
+                    <li> Naphtha - intermediate that can be further processed to make gasoline</li>
+                    <li> Residual fuels, coke, asphalt, benzene, toluene, xylene, petrochemicals, lubricating
+                        oil....</li>
+                </ul>
+            </ul>
+        </section>
+
+        <section>
+            <h1>Crude oil characteristics</h1>
+            <ul>
+                <li> There are many types of crude oil</li>
+                <li> Roughly 160 different grades of crude oil are traded internationally</li>
+                <li> Two most qualities are:</li>
+                <ul>
+                    <li> Viscosity (thickness, density) - lighter crudes are more valuable as they produce more
+                        valuable refined products, measured in API gravity, oil with API gravity below 10 is
+                        heavier than water and vise versa</li>
+                    <li> Sulfur content - the greater the sulfur content, the more costly the refining process</li>
+                    to remove it, sour crudes - high sulfur content, sweet crudes - low surfur content
+                </ul>
+                <li> Two most important oil benchmarks (prices of other oils are calculated by adding a negotiated
+                    differential to the benchmark price) are (both are light and sweet):</li>
+                <ul>
+                    <li> WTI (West Texas intermediate) - API gravity 39.6 degrees, 0.24% sulfur</li>
+                    <li> Brent Blend (the North Sea, UK) - API gravity 38.3 degrees, 0.37% sulfur</li>
+                </ul>
+            </ul>
+
+        </section>
+
+        <section>
+            <h1>Refineries</h1>
+            <ul>
+                <li> Every refinery is different in the sense of technological flexibility</li>
+                <li> Producing higher-margin products costs more as more advanced technology needs to be used</li>
+                <li> The mix of products is driven by:</li>
+                <ul>
+                    <li> Refinery complexity - ability to process crude feedstocks into value-added products,
+                        expressed in Nelson Complexity Index, crude distillation has factor of 1.0, very
+                        complex refineries have NCI over 9</li>
+                    <li> Location - location determines how well the refinerey can access feedstocks and
+                        distribute its product, if products cannot be moved to market, there is no value in
+                        refining them</li>
+                    <li> Product demand - market demand has huge impact on refinery profitability, demographics
+                        plays a key role, motor fuel preferences can change</li>
+                </ul>
+            </ul>
+        </section>
+
+        <section>
+            <h1>Refining value and crack spreads</h1>
+            <ul>
+                <li> Refiners' profits depend on the spread (difference) between the price of crude oil and the
+                    prices of refined products $\Rightarrow$ crack spread</li>
+                <li> Crack spread represents the theoretical refining margin and is quoted in dollars per barrel.</li>
+                <li> Crack spread must take local preferences into account:</li>
+                <ul>
+                    <li> US - 3:2:1 spread because it uses ratio of 3 crude to 2 gasoline plus 1 heating oil</li>
+                    <li> Europe - 6:2:3:1 spread (6 crudes, 2 gasoline, 3 diesel, 1 residual)</li>
+                </ul>
+                <li> Positive crack spread $\Rightarrow$ value of outpus is higher than value of inputs
+                    $\Rightarrow$ positive gross cracking margin</li>
+                    <p>
+                    Q: 3:2:1 crack spread when crude USD 38.00/barrel, gasoline USD 1.00/gallon and heating oil
+                    USD 0.90/gallon?</p>
+                    <p>
+                    A: USD 2.6 = (1.00 x 42 x 2 + 0.90 x 42 - 3 x 38)/3</p>
+            </ul>
+        </section>
+
+        <section>
+            <h1>Production of oil</h1>
+            <ul>
+                <li> The primary driver of cost is the nature and geography of the reservoir</li>
+                <li> Oil industry is a sector (as with other commodities) where competition is primarily
+                    cost-based, companies cannot obtain competetive advantage by differentiation</li>
+                <li> There are 3 possible stages of oil recovery:</li>
+                <ul>
+                    <li> Primary recovery - uses natural reservoir pressure</li>
+                    <li> Secondary recovery - external fluid or gas is injected into reservoir in order to
+                        increase reservoir pressure</li>
+                    <li> Tertiary recovery - try to change chemical conditions of crude (by altering viscosity
+                        or adhensive tensions) - thermal recovery, chemical flooding, gas injection</li>
+
+                </ul>
+                <li> Both secondary and tertiary recovery are extremely expensive and can be justified only by
+                    stable high oil prices</li>
+            </ul>
+
+        </section>
     </main>
+
 </body>
 
 </html>
