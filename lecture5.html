@@ -1,0 +1,161 @@
+<!doctype <!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="main.js"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ["\\(","\\)"]] } });
+    </script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML">
+    </script>
+</head>
+
+<body>
+    <main>
+        <section>
+            <h1>Standard stock price process - GBM</h1>
+            <ul>
+                <li> Standard stock model assumes that percentage return is constant (on average) $\Rightarrow$
+                    Geometric Brownian Motion (GBM)</li>
+                \begin{equation}
+                \frac{dS}{S}=\mu dt + \sigma dz
+                \end{equation}
+                where $S$ is spot price, $\mu$ drift, $\sigma$ volatility, $dt$ infinitesimal time step and $dz$
+                Brownian increment
+                <li> For dz holds </li>
+                \begin{equation}
+                \Delta z = \epsilon \sqrt{\Delta t}, \quad \epsilon \sim N(0,1)
+                \end{equation}
+                <li> Brownian increments from different times are independent.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h1>Ito's lemma and lognormal property of S in GBM</h1>
+            <ul>
+                <li> Ito's lemma: if $x$ follows the Ito process</li>
+                \begin{equation}
+                dx=a(x,t)dt+b(x,t)dz
+                \end{equation}
+                then the function $G=G(x,t)$ follows the process
+                \begin{equation}
+                dG=\left(\frac{\partial G}{\partial x}a+\frac{\partial G}{\partial
+                t}+\frac{1}{2}\frac{\partial^2G}{\partial x^2}b^2\right)dt+\frac{\partial G}{\partial x} b dz
+                \end{equation}
+                <li> If $G=\ln S$, then G follows generalized Wiener process</li>
+                \begin{equation}
+                dG=\left(\mu-\sigma^2/2\right)dt+\sigma dz
+                \end{equation}
+                and therefore $S$ is lognormally distributed
+                \begin{equation}
+                \ln S_T-\ln S_0 \sim \textit{N}\left[(\mu-\sigma^2/2)T,\sigma \sqrt{T}\right]
+                \end{equation}
+            </ul>
+        </section>
+
+        <section>
+
+            <h1>Electricity spot price behavior</h1>
+
+            <ul>
+
+                <li> Black-Scholes formula for stock options pricing assumes that the spot price follows Geometric
+                    Brownian motion (GBM)</li>
+                <li> Electricity on the other hand exhibits mean reversion - tendency to return to its long-term level</li>
+                <li> Basic mean-reverting model (Schwartz, 1997) can be written as</li>
+                \begin{equation}
+                dS=\alpha(\mu-\ln S)S dt + \sigma S dZ
+                \end{equation}
+                <li> Spot price S returns to its long-term level $\bar{S}=e^{\mu}$</li>
+                <li> $\alpha$ is a coefficient of mean-reversion, higher $\alpha$ produces stronger (=faster)
+                    mean-reversion</li>
+                <li> $\mu$ is a coefficient which determines the long-term level</li>
+                <li> $\sigma$ is volatility</li>
+                <li> $dZ$ is the increment of Brownian motion </li>
+            </ul>
+        </section>
+
+        <section>
+            <h1>Discretization of Schwartz model</h1>
+            <ul>
+                <li> For the logarithm of spot price, $x=\ln S$:</li>
+                \begin{equation}
+                dx=\left[\alpha(\mu-x)-1/2 \sigma^2 \right]dt+\sigma dZ
+                \end{equation}
+                <li> The discretized form looks like this:</li>
+                \begin{equation}
+                \Delta x_i=\left[\alpha(\mu-x_i)-1/2 \sigma^2 \right]\Delta t+\sigma \sqrt{\Delta t}\epsilon_i
+                \end{equation}
+                <li> $\epsilon_i$ is from N(0,1)</li>
+                <li> $\alpha$, $\mu$ and $\sigma$ needs to be estimated</li>
+                <li> $\alpha$ and $\mu$ can be estimated via linear regression because we can rewrite previous equation
+                    as</li>
+                \begin{equation}
+                \Delta x_i=\alpha_0+\alpha_1 x_i + \sigma \epsilon_i
+                \end{equation}
+                <li> $\alpha_0=\alpha \bar{x} \Delta t$ and $\alpha_1= - \alpha \Delta t$ where we have incorporated
+                    $-1/2 \sigma^2$ into $\bar{x}$ </li>
+            </ul>
+        </section>
+
+        <section>
+            <h1>The half-life</h1>
+            <ul>
+                <li> Half-life is the time in which price reverts half way back to its long-term level from its current
+                    state</li>
+                <li> We don't take random shocks into account.</li>
+                <li> In the absence of the random term, $x=\ln S$:</li>
+                \begin{equation}
+                dx=\alpha (\bar{x}-x) dt
+                \end{equation}
+                <li> By integration we obtain the half-life $t_{1/2}$</li>
+                \begin{equation}
+                t_{1/2}=\ln(2)/\alpha
+                \end{equation}
+                <li> Half-life is true on average only. It doesn't depend on the magnitude of deviation! </li>
+            </ul>
+        </section>
+
+        <section>
+            <h1>Simulating jumps</h1>
+            <ul>
+                <li> Processes based on the Wiener process are too 'smooth' (Price distribution at any fixed time is
+                    Gaussian with no fat tails).</li>
+                <li> Real-world price distributions exhibit fat tails (large kurtosis).</li>
+                <li> We can add kurtosis by adding jumps to the process:</li>
+                \begin{equation}
+                dS=\alpha (\mu - \ln S)S dt + \sigma S dz + \kappa S dq
+                \end{equation}
+                <li> $\kappa$ is the jump size (draw from some distribution) and dq is a discrete time process which
+                    most of the time is zero and one at the time when jump realizes</li>
+                <li> When jump occurs, the spot price is well above/under the long-term level and shall come back due
+                    to the mean-reversion term quite quickly.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h1>Recursive filter</h1>
+            <ul>
+                <li> Recursive filter is used to divide historical data in two groups: jumps and standard
+                    mean-reverting process</li>
+                <li> It is assumed that price differences which are too far from average price change are realizations
+                    of the jump process</li>
+                <li> Probability that price change drawn from Normal distribution is further than 3 standard deviations
+                    from the mean is 0.3%.</li>
+                <li> Usually, real data have percentage greater than 0.3% and we consider all values within this range
+                    as jumps and drop them from the sample.</li>
+                <li> Then again we calculate mean and standard deviation and look at $>3\sigma$ probability.</li>
+                <li> If this probability is not satisfactory, we cut tail values again.</li>
+                <li> We repeat previous steps until $3 \sigma$ condition is met, hence recursive filter.</li>
+            </ul>
+        </section>
+    </main>
+
+</body>
+
+</html>
