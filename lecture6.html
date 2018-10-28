@@ -1,0 +1,196 @@
+<!doctype <!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="main.js"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ["\\(","\\)"]] } });
+    </script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML">
+    </script>
+</head>
+
+<body>
+    <main>
+        <section>
+
+        <h1>Value at risk (VaR)</h1>
+        <ul>
+        <li> VaR is a risk measure which estimates riskiness of a portfolio.</li>
+        
+        <li> Key parameters of VaR are holding period and confidence level:</li>
+        
+        <ul>
+        
+        <li> Holding period - time period during which we hold (=are forced by illiquidity to hold) our portfolio and during which we can realize loss</li>
+        
+        <li> Confidence level - usually 95% or 99%, it detemines what probability we attribute to 'standard market'</li>
+        
+        </ul>
+        
+        <li> Definition: VaR is a possible loss (expressed in currency terms) which won't be realized on our portfolio during the holding period with a given confidence level.</li>
+        
+        <li> Less abstract definition: if $VaR_{95\%}(10 ~ days)=2 ~ MEUR$, then during next 10 days we won't lose more than 2 MEUR on our portfolio with 95\% probability.</li>     
+        
+        <li> And vise versa - there is 5% probability we will lose more than 2 MEUR during next 10 days</li>
+        
+        <li> VaR is widely used across many industries but has shortcomings...</li>
+        </ul>
+        </section>
+        
+         
+        
+        <section>
+        <h1>Issues with VaR</h1>
+        One should be alert while using VaR because:
+        <ul>
+        <li> VaR doesn't give you the ultimate possible loss</li>
+        <li> Real loss could be much higher than VaR, especially if loss distribution has fat tails</li>
+        <li> VaR is not a coherent risk measure because it is not subadditive (grouping doesn't necessarily lower riskiness)</li>
+        <li> By changing holding period and confidence level you also change the value and interpretation of VaR</li>
+        <li> There are actually two definitions of VaR depending on what we consider loss:</li>
+        <ul>
+        <li> Absolute VaR - loss in the accounting sense</li>
+        \begin{equation}
+        VaR=Q_{95\%}(L)=-Q_{5\%}(P)
+        \end{equation}
+        <li> Relative VaR - loss in the economic sense</li>
+        \begin{equation}
+        VaR=Q_{95\%}(L)-E(L)=E(P)-Q_{5\%}(P)
+        \end{equation}
+        </ul>
+        Q is quantile, L is loss distribution, P is profit distribution (L=-P)
+        <li> If $E(L)=0$, then both definitions give the same VaR</li>   
+        </ul>
+        </section>
+        
+         
+        <section>
+        <h1>Tails of distributions</h1>
+        <ul>
+        <li> Tails of a distribution are its beginning and end</li>
+        <li> Fat-tailed distributions are characterized by their high skewness and kurtosis</li>
+        <li> Skewness - how symmetrical the distribution is</li>
+        \begin{equation} 
+        Skewness=\frac{E\left[(X-\mu)^3\right]}{\sigma^3}
+        \end{equation}
+        Positive skewness means that the distribution is skewed to the right, with negative skewness to the left
+        <li> Kurtosis - tells us what is the proportion between distribution mass around the mean and the mass on its tails</li>
+        \begin{equation}
+        Kurtosis=\frac{E\left[(X-\mu)^4\right]}{\sigma^4}
+        \end{equation}
+        Kurtosis of Normal distribution is 3, distributions with kurtosis higher than 3 are said to be leptokurtic (=fat-tailed).
+        </ul>
+        </section>
+        
+         
+        
+        <section>
+        <h1>Conditional value at risk (Expected shortfall)</h1>
+        <ul>
+        <li> Conditional value at risk CVaR (=Expected shortfall, ES) is a risk measure which addresses subadditivity and fat-tails</li>
+        <li> It answers the question what is our loss if we hit the VaR threshold</li>
+        \begin{equation}
+        CVaR_{\alpha}=E[L|L>VaR_{\alpha}]=\frac{1}{1-\alpha}\int_{Var_{\alpha}}^{\infty}x.l(x) dx = \frac{1}{1-\alpha}\int_{\alpha}^{1}Q_l dl
+        \end{equation}
+        where l is the distribution of loss L
+        <li> CVaR is subadditive and spots (although in average sense) a fat-tailed distribution</li>
+        <li> CVaR is more demanding on the accuracy of price distribution as we calculate expected value only of that $(1-\alpha)$-part of it</li>
+        </ul>
+        </section>
+         
+        
+        <section>
+        <h1>Risk methodology for power generation}</h1>
+        <ul>
+        <li> Key assumption of VaR is that we can closewhole position during holding period. This is not always the case.</li>
+        <li> Production of power generation is shaped (probably coming from spread modelling) - it doesn't consist of standardized blocks which can be traded on the exchange</li>
+        <li> Total production can be divided in hedgeable position and residual position</li>
+        \begin{equation}
+        Total ~ position=Hedgeable ~ position + Residual ~ position
+        \end{equation}
+        <li> Residual position (which cannot be closed) must be delivered on the spot but similar reasoning as with VaR can be applied $\rightarrow$ profit at risk</li>
+        <li> Profit at risk (PaR) - what is the maximum loss (again, in the sense of confidence level) that can be incurred if we deliver residual position on the spot</li>
+        </ul>
+        </section>
+        
+        <section>
+        <h1>How to model forward curve?</h1>
+        <ul>
+            <li> F(t,T) - forward price at time $t$ for maturity $T$, $\sigma e^{-\alpha (T-t)}$ - volatility function, $dz(t)$ - source of risk</li>
+            \[
+            \frac{dF(t,T)}{F(t,T)}=\sigma e^{-\alpha (T-t)}dz(t)
+            \]
+            <li> Generalization (single factor model)</li>
+            \[
+            \frac{dF(t,T)}{F(t,T)}=\sigma(t,T) dz(t)
+            \]
+            <li> Usual dynamics of forward curve - 3 major movements: shift, tilt, bend</li>
+            \[
+            \frac{dF(t,T)}{F(t,T)}=\sigma_1(t,T) dz_1(t)+\sigma_2(t,T) dz_2(t)+\sigma_3(t,T) dz_3(t)
+            \]
+            <li> General dynamics (multi-factor model, $dz_i$ independent):</li>
+            \[
+            \frac{dF(t,T)}{F(t,T)}=\sum^n_{i=1}\sigma_i(t,T) dz_i(t)
+            \]	
+        </ul>
+        </section>
+        
+        <section>
+        <h1>(Eigen)excursion</h1>
+        <ul>
+            <li> Matrix $A$ (linear transformation), eigenvector $\vec{v}$, eigenvalue $\lambda$</li>
+            \[
+            A \vec{v} = \lambda \vec{v}
+            \]
+            <li> How to find eigenvalue? Find roots of characteristic equation.</li>
+            \[
+            \left|A-\lambda I \right|=0
+            \]
+            <li> If $Q=[\vec{v_1}, \vec{v_2}, ..., \vec{v_n}]$ is a matrix of eigenvectors and $\Lambda=diag(\lambda_1, \lambda_2, ..., \lambda_n)$ is a diagonal matrix of eigenvalues, then</li>
+            \[
+            A=Q \Lambda Q^{-1}
+            \]
+        </ul>
+        </section>
+        
+        <section>
+        <h1>Eigendecomposition of covariance matrix</h1>
+        <ul>
+            <li> Special case of eigendecomposition: covariance matrix.</li>
+            <li> Covariance matrix is symmetric and positive semidefinite $\rightarrow$ eigenvalues are nonnegative and eigenvectors (principal components) are orthogonal. </li>
+            <li> Largest eigenvalues correspond to largest covariance in the direction of respective principal component $\rightarrow$ PCA (principal component analysis).</li>
+        </ul>
+        </section>
+        
+        <section>
+        <h1>Estimation of volatility functions</h1>
+        
+        <ul>
+            <li> After applying Ito's lemma to the general multi-factor model:</li>
+            \[
+            d \ln F(t,T)=-\frac{1}{2}\sum_{i=1}^n \sigma_i(t,T)^2 dt + \sum_{i=1}^n \sigma_i(t,T)dz_i(t)
+            \]
+            <li> In discrete form:</li>
+            \[
+            \Delta \ln F(t,t+\tau_j)=-\frac{1}{2}\sum_{i=1}^n\sigma_i(t,t+\tau_j)^2\Delta t+\sum_{i=1}^n\sigma_i (t,t+\tau_j)\Delta z_i
+            \]
+            <li> From historical forward curves we can calculate covariance matrix $\Sigma=\{\hat{\sigma}_{i,j}\}$ of relative maturities $\tau_i$, $\tau_j$</li>
+            <li> Covariance matrix could be eigendecomposed $\Sigma=\Gamma \Lambda \Gamma^{T}$, $\Gamma=\{v_{ij}\}$.</li>
+            <li> We select eigenvectors $\vec{v}$ with highest eigenvalue $\lambda_i$ and set </li>
+            \[
+            \sigma_i(t,t+\tau_j)=v_{ji}\sqrt{\lambda_i}.
+            \]
+        </ul>
+        
+        </section>
+    </main>
+
+</body>
+
+</html>
