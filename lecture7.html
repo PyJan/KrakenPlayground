@@ -1,0 +1,138 @@
+<!doctype <!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="main.js"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ["\\(","\\)"]] } });
+    </script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML">
+    </script>
+</head>
+
+<body>
+    <main>
+        <section>
+            <h1>Types of power plants</h1>
+            <ul>
+                <li> Nuclear power plant - very high initial investment, low operational costs, provisions for
+                    decommission, radioactive wastes</li>
+                <li> Coal power plant - dirty energy source, long-term contracts with coal suppliers, it is necessary
+                    to cover production with $CO_2$ certificates</li>
+                <li> Gas power plant - cleaner energy source, fast start-up which can cover peaks of demand, not so
+                    expensive to build</li>
+                <li> Hydro power plant - cheapiest energy source, can produce only certain amount of energy
+                    proportional to its reservoir volume, should produce only when price is highest</li>
+                <li> Fuel oil power plant - the most expensive to run, turned on only in extreme price spikes</li>
+                <li> Renewable energy sources (solar, wind, thermal, biomass) - subsidized and with guaranteed acccess
+                    to the grid, high production swings coming from changing weather conditions</li>
+            </ul>
+        </section>
+
+
+
+
+        <section>
+            <h1>Merit order</h1>
+            <ul>
+                <li> All producers receive one price for their production.</li>
+                <li> Only variable costs (=fuel in our simplification) matter, fixed/investment costs do not enter
+                    economic decision making</li>
+                <li> Producers with low variable costs produce always, producers with high variable costs produce only
+                    if price is high enough to justify running the factory</li>
+                <li> Merit order (supply stack) - chain of generation sources sorted by their variable costs</li>
+                <li> Market price is then given by the cost of the last producing unit in merit order</li>
+                <li> Typical stack is following: hydro $\Rightarrow$ nuclear $\Rightarrow$ coal $\Rightarrow$ gas
+                    $\Rightarrow$ oil </li>
+                <li> The biggest obstacle is hydro - near-zero marginal cost but profit should be maximized by
+                    inter-temporal balancing</li>
+                <li> Other issues: spacial aspects, outages, power plants are not binary, export/import as external
+                    variable</li>
+            </ul>
+        </section>
+
+
+
+        <section>
+            <h1>Basic dispatch</h1>
+            <ul>
+                <li> Producer of a single unit $i$ wants to maximazi profit $\Omega_i$ which equals $\pi P_i -
+                    C_i(P_i)$ where $P_i$ is the power produced (during an hour), $\pi$ is the energy price and
+                    $C_i(P_i)$ is the cost of producing this amount of energy.</li>
+                <li> Maximum is reached when $d\Omega/dP_i=0$ which is when </li>
+                \begin{equation}
+                \frac{d(\pi P_i)}{dP_i}=\frac{dC_i(P_i)}{dP_i}
+                \end{equation}
+                <li> The first term is marginal revenue, the second marginal cost.</li>
+                <li> When $\pi$ is a market price, it doesn't depend on $P_i$ and we receive</li>
+                \begin{equation}
+                \frac{dC_i(P_i)}{dP_i}=\pi
+                \end{equation}
+                <li> Producer should increase input until his marginal costs equal market price.</li>
+            </ul>
+        </section>
+
+
+        <section>
+            <h1>Other dispatch considerations</h1>
+            <ul>
+                <li> Every power plant has maximum and minimum output limits which constrain possible profits.</li>
+                <li> No-load cost - quasi-fixed costs which the power plant incures while it is connected to the system
+                    (independent of power generated)</li>
+                <li> Start-up cost - cost of getting the power plant running (quasi-fixed). These costs must be
+                    amortized over longer time periods. Even negative profit for some hours is better than incurring
+                    this cost again.</li>
+                <li> Excessive start-ups and shut-downs damage the power plant $\rightarrow$ minimum uptime and
+                    downtime constrains.</li>
+                <li> For reasons above, power plant cannot be optimized from hour to hour and price forecasts need to
+                    be made.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h1>Heat rate, thermal efficiency and spreads</h1>
+            <ul>
+                <li> Thermal efficiency is a ratio of electricity produced to energy consumed (thermal plants 30-50%)</li>
+                <li> Heat rate is energy input (in MMBtu) required to produce 1 MWh of electricity.</li>
+                <li> Both heat rate and thermal efficiency are power plant specific.</li>
+                <li> If we assume that variable production cost $C_i(P_i)$ consists solely of fuel which we burn, then
+                    we obtain spread valuation models.</li>
+                <li> Power plant can be looked at as an option on spread with strike equal to variable non-fuel costs
+                    (usually assumed zero).</li>
+                <li> Binary dispatch - either the spread is positive and we produce at full capacity or negative and we
+                    don't produce at all.</li>
+                \begin{equation}
+                Spark ~ spread = Power ~ price - Heat ~ rate ~ * ~ Fuel ~ price
+                \end{equation}
+            </ul>
+        </section>
+
+        <section>
+            <h1>Shortcoming of spark spread (and other spreads)</h1>
+            <ul>
+                <li> Using spark spread valuation could lead to overvaluation of generation assets due to:</li>
+                <ul>
+                    <li> Unrealistic assumtions used for price modelling.</li>
+                    <li> Primitive dispatch - issues as noted before: minimum uptime and downtime, start-up costs,
+                        limited number of starts, ramp-up costs</li>
+                    <li> Operational problems - supply shortage, dispatch coordination, bargaining pressure of
+                        suppliers</li>
+                    <ul>
+                        <li> Most popular spreads are:</li>
+                        <ul>
+                            <li> Nuclear - quark spread</li>
+                            <li> Coal - dark spread</li>
+                            <li> Gas - spark spread</li>
+                            <ul>
+                            </ul>
+        </section>
+    </main>
+
+</body>
+
+</html>
