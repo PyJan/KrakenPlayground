@@ -1,0 +1,204 @@
+<!doctype <!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="main.js"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ["\\(","\\)"]] } });
+    </script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML">
+    </script>
+</head>
+
+<body>
+    <main>
+        <section>
+            <h1>Key notes before we even start...</h1>
+                <ul>
+                    <li> There is no single 'volatility'! Every volatility is defined and estimated in the context of a
+                        specific stochastic process (which is not mentioned at all in some books...).</li>
+                    <li> Volatility is always measured per some unit of time (day, week, year and so on).</li>
+                    <li> Volatility should always capture features of the market it describes, for example seasonality
+                        in energy markets.</li>
+                </ul>
+        </section>
+
+
+        <section>
+            <h1>Volatility of GBM</h1>
+                <ul>
+                    <li> Geometric Brownian motion is following process:</li>
+                        \begin{equation}
+                        dS=\mu S dt + \sigma S dz
+                        \end{equation}
+                    <li> GBM is a process where proportional changes in asset price (dS/S) have constant drift $\mu$
+                        and volatility $\sigma$</li>
+                    <li> By integrating GBM equation we learn that S is continuously compounded with return rate $\mu$
+                        (on average)</li>
+                    <li> From set of prices $\{S_i\}$ we calculate volatility $\sigma$ by following steps:</li>
+                        <ul>
+                            <li> Calculate continuously compounded return:</li>
+                                \begin{equation}
+                                \ln \frac{S_i}{S_{i-1}} \cong \frac{S_i-S_{i-1}}{S_{i-1}}
+                                \end{equation}
+                            <li> Calculate standard deviation of those returns</li>
+                            <li> Apply the correct multiplication factor</li>
+                        </ul>
+                </ul>
+        </section>
+
+
+        <section>
+            <h1>Multiplication factor for GBM</h1>
+                <ul>
+                    <li> In step 1 and 2 we have calculated volatility for time period between $S_i$ and $S_{i-1}$</li>
+                    <li> If we want volatility for a time unit which is T-times longer, we need to multiply our result</li>
+                        by $\sqrt{T}$
+                    <li> So if we have daily data, we must multiply by $\sqrt{250}$ (number of trading days) to obtain
+                        annual volatility (volatility where time unit is one year).</li>
+                    <li> Factor $\sqrt{T}$ is applicable everytime we calculate volatility of the sum of independent
+                        and identically distributed random varibles (in the case of GBM we add up returns which are
+                        independent and normally distributed) because</li>
+                        \begin{equation}
+                        \sigma^2_{x_1+x_2+...+x_n}=\sigma^2_{x_1}+\sigma^2_{x_2}+...+\sigma^2_{x_n}
+                        \end{equation}
+                </ul>
+        </section>
+
+
+        <section>
+            <h1>Volatility of simple mean-reverting model I</h1>
+                <ul>
+                    <li> The logarithm of our mean-reverting model, $x=\ln S$, follows the Ornstein-Uhlenbeck process
+                        (O-U):</li>
+                        \begin{equation}
+                        x=\alpha(\bar{x}-x)dt+\sigma dz
+                        \end{equation}
+                        where $\bar{x}=\mu-\sigma^2/2\alpha$
+                    <li> For the purpose of parameter estimation we can turn this equation into a regression of $x_i$
+                        on $\Delta x_i$</li>
+                        \begin{equation}
+                        \Delta x_i=\alpha_0+\alpha_1 x_i + \sigma \sqrt{\Delta t} \epsilon_i
+                        \end{equation}
+                    <li> From $\alpha_0$ and $\alpha_1$ we can calculate $\alpha$ and $\mu$. $\sigma$ can be estimated
+                        from the same equation.</li>
+                    <li> This approach is applicable for small $\Delta t$ only (differential equation is a limit of our
+                        discretization when $\Delta t \rightarrow 0$)!</li>
+                    <li> The set of $\Delta x_i$ is not independent (depends on the value of x). How should we scale
+                        volatility? What if $\Delta t$ is big?</li>
+                </ul>
+        </section>
+
+        <section>
+            <h1>Volatility of simple mean-reverting model II</h1>
+                <ul>
+                    <li> Exact discretization formula for any $\Delta t$ is following:</li>
+                        \begin{equation}
+                        x_{i+1}=e^{-\alpha \Delta t}x_{i}+(1-e^{-\alpha \Delta t})\mu +\sigma \sqrt{\frac{1-e^{-2\alpha
+                        \Delta t}}{2\alpha}}\epsilon_i
+                        \end{equation}
+                    <li> Obserations:</li>
+                        <ul>
+                            <li> Value in the next step $x_{i+1}$ is a weighted average of current value $x_i$ and
+                                long-term level $\mu$ (on average)</li>
+                            <li> Distribution of x at any time is Normally distributed.</li>
+                            <li> When $\Delta t \rightarrow \infty$, then the limiting distribution has standard
+                                deviation $\sigma/\sqrt{2\alpha}$</li>
+                            <li> Term $\sqrt{\frac{1-e^{-2\alpha \Delta t}}{2\alpha}}$ is our scaling factor for time
+                                interval of length $\Delta t$ ($\sigma$ is not 'volatility' of $\Delta t=1$).</li>
+                        </ul>
+                </ul>
+        </section>
+
+        <section>
+            <h1>Volatility of forwards</h1>
+                <ul>
+                    <li> Forward price can be calculated as discounted expected value of future spot price using
+                        risk-neutral measure. For this reason volatility of forward price increases as maturity date
+                        nears.</li>
+                    <li> On the other side, volatility of constant-maturity forwards is quite constant. This is also
+                        true if we have a standard forward with long maturity $\rightarrow$ we will assume constant
+                        volatility for forwards...</li>
+                    <li> The most basic approach to estimate volatility of a forward is to assume independence of price
+                        changes which usually leads to SMA and EWMA estimators.</li>
+                </ul>
+        </section>
+
+        <section>
+            <h1>Simple moving average (SMA)</h1>
+                <ul>
+                    <li> For price modelling and VaR estimation, we need to know future value of model parameters.</li>
+                    <li> Simpliest way to estimate volatility is to use simple moving averge.</li>
+                    <li> When we have a set of N returns (of forward) $x_i$ then</li>
+                        \begin{equation}
+                        \hat{\sigma}=\sqrt{\frac{1}{N}\sum_{i=1}^{N}(x_i-\mu)^2}
+                        \end{equation}
+                    <li> The key is to choose the right number N of latest observations (which is true for any method).</li>
+                    <li> If N is too low, then our observations are the most recent but we have poor statistics. If N
+                        is too high, we might include observations which misrepresent the future.</li>
+                </ul>
+        </section>
+
+        <section>
+            <h1>Exponentially weighted moving average (EWMA)</h1>
+                <ul>
+                    <li> Simple moving average puts equal weights on observations but more recent data should be more
+                        relevant...</li>
+                    <li> EWMA model addresses the issue by giving older observations exponentially less weight:</li>
+                        \begin{equation}
+                        \hat{\sigma}=\sqrt{\frac{1}{\sum_{i=1}^N \lambda^{i-1}}\sum_{i=1}^N \lambda^{i-1}(x_i-\mu)^2}
+                        \end{equation}
+                    <li> Following approximation of normalizing factor could be made:</li>
+                        \begin{equation}
+                        \frac{1}{\sum_{i=1}^N \lambda^{i-1}}=1-\lambda
+                        \end{equation}
+                    <li> $\lambda \in (0,1)$ is called the decay factor and determines how weights are distributed.</li>
+                    <li> $\lambda$ close to 1 gives almost equal weights while small $\lambda$ almost forgets older
+                        observations</li>
+                </ul>
+        </section>
+
+
+
+        <section>
+            <h1>SMA vs EWMA</h1>
+                <ul>
+                    <li> EWMA is not necessarily better than SMA.</li>
+                    <li> As always and for both approaches, time span which we use is the key to success.</li>
+                    <li> Problem of sudden huge price changes and their impact.</li>
+                    <li> Price jumps influence SMA by remaining in moving window with an equal weight. Sudden
+                        appearance and disappearance from calculation.</li>
+                    <li> Price jumps disappear from EWMA gradually but the first impact is bigger than in SMA!</li>
+                    <li> Sudden changes in calculated volatility due to price jump could put analytic's credibility in
+                        question (if not properly explained). Know your model, its behavior and limitations!</li>
+                </ul>
+        </section>
+
+        <section>
+            <h1>Covariances and correlations</h1>
+                <ul>
+                    <li> SMA and EWMA methodology can be also used for covariance calculation</li>
+                    <li> SMA:</li>
+                        \begin{equation}
+                        \hat{\sigma}^2_{1,2}=\frac{1}{N}\sum_{i=1}^{N}(x_{1,i}-\mu_1)(x_{2,i}-\mu_2)
+                        \end{equation}
+                    <li> EWMA:</li>
+                        \begin{equation}
+                        \hat{\sigma}^2_{1,2}=(1-\lambda)\sum_{i=1}^{N}\lambda^{i-1}(x_{1,i}-\mu_1)(x_{2,i}-\mu_2)
+                        \end{equation}
+                    <li> Correlation estimate is then</li>
+                        \begin{equation}
+                        \hat{\rho}_{1,2}=\frac{\hat{\sigma}^2_{1,2}}{\hat{\sigma}_1\hat{\sigma}_2}
+                        \end{equation}
+                </ul>
+        </section>
+    </main>
+
+</body>
+
+</html>
