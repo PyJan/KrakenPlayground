@@ -1,0 +1,125 @@
+<!doctype <!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="main.js"></script>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ["\\(","\\)"]] } });
+    </script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML">
+    </script>
+</head>
+
+<body>
+    <main>
+        <section>
+
+            <h1>Definitions</h1>
+
+            <ul>
+                <li> Credit risk - possibility that you will lose money when your counterparty is in default</li>
+                <li> Credit exposure - the total amount of money which you can lose in case of counterparty default</li>
+                <li> Credit rating - assessment of counterparty's solvency</li>
+                <li> Probability of default - probability that counterparty will default in a given time period
+                    (usually a year)</li>
+                <li> Settlement risk - the risk of not being paid after you make delivery</li>
+                <li> Replacement risk - the risk of losing positively-valued (with positive MTM) contract</li>
+                <li> MTM (=mark to market, M2M) - revaluation of our contract with current prices</li>
+            </ul>
+            \begin{equation}
+            Credit ~ risk = Settlement ~ risk + Replacement ~ risk
+            \end{equation}
+        </section>
+
+
+
+        <section>
+            <h1>Settlement risk</h1>
+            <ul>
+                <li> Settlement risk is connected with physical delivery of energy.</li>
+                <li> Invoices are usually sent and paid after delivery is made (settlement specifics are always part of
+                    the contract)</li>
+                <li> In some markets (especially electricity) it is difficult to stop delivery immediately when your
+                    counterparty misses the due date.</li>
+                <li> For example if the due date is the 20-th after the delivery month (standard payment scheme), then
+                    settlement exposure is a 3-month delivery worth (accounting for delays in reporting, notice
+                    letters, market operator notification and actual disconnection).</li>
+            </ul>
+
+            Q: What is the settlement exposure if we are in the middle of selling 5 MW baseload for 23 EUR/MWh and
+            standard payment scheme is used?<br>
+
+            A: 248,400 EUR (=23*5*24*3*30)
+        </section>
+
+
+
+        <section>
+            <h1>Replacement risk</h1>
+            <ul>
+                <li> Replacement risk is connected to MTM of our contract.</li>
+                <li> If $MTM>0$, then our contract contains an economic value which we can lose if our counterparty
+                    defaults</li>
+                <li> MTM exposure is calculated from future delivery only, that is energy we need to buy/sell for worse
+                    price if contract defaults.</li>
+                <li> Contrary to settlement risk replacement risk can arise from both selling and buying.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h1>Credit risk of portfolio of deals</h1>
+            <ul>
+                <li> If deals with one counterparty are done separately, then only positive exposures are taken into
+                    account and all are added $\rightarrow$ the worst case, any new deal can only increase exposure</li>
+                <li> Trading is usually done under EFET (European Federation of Energy Traders) agreement -
+                    standardized template for a bilateral umbrella agreement.</li>
+                <li> There are two types of netting depending on local jurisdiction:</li>
+                <ul>
+                    <li> Close out netting - the best case, the court recognizes economic value of contracts and allows
+                        settlement-replacement netting</li>
+                    \begin{equation}
+                    Exposure = \sum_{portfolio}Settl_i + \sum_{portfolio}Repl_i - Collaterals
+                    \end{equation}
+                    <li> Payment netting - only payments can be netted</li>
+                    \begin{equation}
+                    Exposure = \max(0,\sum_{portfolio}Settl_i) + \sum_{portfolio}\max(0,Repl_i) - Collaterals
+                    \end{equation}
+                </ul>
+            </ul>
+        </section>
+
+        <section>
+            <h1>Credit rating</h1>
+            <ul>
+                <li> Magnitude of credit exposure should be always proportional to counterparty's solvency</li>
+                <li> Counterparty's ability to keep its commitments is reflected in its rating.</li>
+                <li> Credit rating is estimation of creditworthiness and is usually expressed as a letter or letters.</li>
+                <li> Possible rating scale is (S&P scale): AAA, AA, A, BBB, BB, B, CCC, CC, C, D where triple A is the
+                    best rating and D means counterparty in default.</li>
+                <li> Every rating is connected to a certain probability of default and a credit limit should be
+                    assigned to it.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h1>Mitigating credit risk</h1>
+            Credit risk can be mitigated several ways:
+            <ul>
+                <li> Adhere to risk limits.</li>
+                <li> Received bank guarantee can cover exposure (at least partially).</li>
+                <li> Prepayments or more favourable billing scheme can reduce settlement risk.</li>
+                <li> Mother company can provide PCG (parent company guarantee) for its child.</li>
+                <li> Cash can be deposited as a collateral.</li>
+                <li> Use of credit rating or balance sheet triggers in the contract.</li>
+            </ul>
+        </section>
+    </main>
+
+</body>
+
+</html>
